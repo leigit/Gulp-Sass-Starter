@@ -1,0 +1,22 @@
+{
+  "name": "Gulp-Sass-Starter",
+  "version": "1.0.0",
+  "authors": [
+    "Leigh Gittoes <leighgittoes@gmail.com>"
+  ],
+  "description": "Basic Gulp and Sass project starter",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "normalize-scss": "~3.0.3"
+  },
+  "devDependencies": {}
+}
