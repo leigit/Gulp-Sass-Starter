@@ -1,2 +1,24 @@
-.sass-cache
+# Dependency directory #
+###################### # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
+node_modules
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+*.DS_Store
+
+# tmp files #
+######################
+.tmp
+
+# Sass cache #
+######################
 *.css.map
+**/.sass-cache
+**/.sass-cache/*
