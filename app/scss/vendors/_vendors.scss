@@ -1,0 +1,18 @@
+// Vendors
+// ----------
+// include all external libraries and frameworks
+// ==========
+
+// Since we have already included the bower_components path in our gulpfile, its not necessary to include it in the imports below
+//
+
+
+// Reset
+// -----
+@import "normalize-scss/_normalize.scss";
+
+// Any other vendor libraries or frameworks .. eg. susy
+// ---------------------
+// eg.. @import "susy/sass/susy";
+
+

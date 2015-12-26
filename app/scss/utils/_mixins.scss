@@ -1,0 +1,207 @@
+// Mixins
+// ----------
+//
+// ==========
+
+
+
+// Clearfix
+// --------
+%cf {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+/// Font Smoothing
+/// --------------
+/// Mixin to turn on font smoothing, especially for light text on dark background for OSX
+
+/// @example
+/// .element {
+///  @include font-smoothing;
+/// }
+
+@mixin font-smoothing($value: on) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+/// Is-invisible
+/// ------------
+/// Makes element invisible, but still accessible
+/// @link http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin is-invisible {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+}
+
+/// Is-visible
+/// ----------
+/// Turns off the element-invisible effect.
+@mixin is-visible {
+  position: static;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+/// Placeholder
+/// -----------
+/// Changes Placeholder styles
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    //  Firefox 18-
+    @content;
+  }
+  &::-moz-placeholder {
+    // Firefox 19+
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+// Text input
+// ------------
+// Calls addresses all text inputs in one selector
+$text-input-types: text, password, date, datetime, datetime-local, month, week, email, number, search, tel, time, url, color !default;
+
+@mixin text-input($types: $text-input-types) {
+  $selectors: ();
+
+  @each $type in $types {
+    $selector: unquote("input[type='#{$type}']");
+    $selectors: append($selectors, $selector, comma);
+  }
+
+  & #{$selectors} {
+    @content;
+  }
+}
+
+/// Trans-prep
+/// ----------
+/// Prepares for transforms. Gives backface-visibility: hidden
+/// to remove flickering effect on Webkit browsers
+/// @link http://blog.teamtreehouse.com/increase-your-sites-performance-with-hardware-accelerated-css
+@mixin trans-prep {
+  // backface visibility
+  backface-visibility: hidden;
+}
+
+
+/// Triangle
+/// --------
+/// We use this to create isosceles triangles
+/// - $triangle-size       - Used to set border-size. No default, set a px or em size.
+/// - $triangle-color      - Used to set border-color which makes up triangle. No default
+/// - $triangle-direction  - Used to determine which direction triangle points.
+///                          Options: top, bottom, left, right
+@mixin triangle($triangle-size, $triangle-color, $triangle-direction) {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border: inset $triangle-size;
+  @if $triangle-direction == top {
+    border-color: $triangle-color transparent transparent transparent;
+    border-top-style: solid;
+  }
+  @if $triangle-direction == bottom {
+    border-color: transparent transparent $triangle-color transparent;
+    border-bottom-style: solid;
+  }
+  @if $triangle-direction == left {
+    border-color: transparent transparent transparent $triangle-color;
+    border-left-style: solid;
+  }
+  @if $triangle-direction == right {
+    border-color: transparent $triangle-color transparent transparent;
+    border-right-style: solid;
+  }
+}
+
+/// Text overflow
+/// -------------
+/// Requires inline-block or block for proper styling
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/// Pixels to REM
+/// ----------
+/// relys on the html {font-size: 62.5%} to set a base of 10px
+
+
+@function parseInt($n) { /* 2 */
+  @return $n / ($n * 0 + 1);
+}
+
+@mixin rem($property, $values) {
+  $px : (); /* 3 */
+  $rem: (); /* 3 */
+
+  @each $value in $values { /* 4 */
+
+    @if $value == 0 or $value == auto { /* 5 */
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+
+    @else {
+      $unit: unit($value);    /* 6 */
+      $val: parseInt($value); /* 6 */
+
+      @if $unit == "px" {  /* 7 */
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == "rem" { /* 7 */
+        $px : append($px,  ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {     /* 8 */
+    #{$property}: $px;  /* 9 */
+  } @else {
+    #{$property}: $px;  /* 9 */
+    #{$property}: $rem; /* 9 */
+  }
+}
