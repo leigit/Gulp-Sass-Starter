@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
 var runSequence = require('run-sequence');
-var data = require('gulp-data');
 var browserSync = require('browser-sync');
 var sassdoc = require('sassdoc');
 
