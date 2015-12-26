@@ -96,10 +96,7 @@ gulp.task('useref', function() {
     // Uglifies only if it's a Javascript file
     .pipe($.if('*.js', $.uglify()))
     // Minifies only if it's a CSS file
-    .pipe($.sourcemaps.init())
-      .pipe($.if('*.css', $.cssnano()))
-    //.pipe($.if('*.css', $.minifyCss())) TODO for removal
-    .pipe($.sourcemaps.write('.'))
+    .pipe($.if('*.css', $.cssnano()))
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.size({
