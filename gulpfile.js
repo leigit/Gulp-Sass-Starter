@@ -58,12 +58,6 @@ gulp.task('sassdoc', function () {
       alias: true,
       watermark: true,
     },
-    groups: {
-      'undefined': 'Ungrouped',
-      foo: 'Foo group',
-      bar: 'Bar group',
-    },
-    basePath: 'https://github.com/SassDoc/sassdoc',
   };
 
   return gulp.src('app/scss/**/*.scss')
