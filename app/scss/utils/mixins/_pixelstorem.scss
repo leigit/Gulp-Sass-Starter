@@ -1,0 +1,52 @@
+/// Pixels to REM - function
+/// ----------
+/// relies on setting: html {font-size: 62.5%} to set a base of 10px
+/// @example
+/// .element {
+///  @include rem(font-size, 16px)
+/// }
+@function pixelsToRem($n) {
+  @return $n / ($n * 0 + 1);
+}
+
+/// Pixels to REM - mixin
+/// ----------
+/// relies on setting: html {font-size: 62.5%} to set a base of 10px
+/// @example
+/// .element {
+///  @include rem(font-size, 16px)
+/// }
+@mixin rem($property, $values) {
+  $px : ();
+  $rem: ();
+
+  @each $value in $values {
+
+    @if $value == 0 or $value == auto {
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+
+    @else {
+      $unit: unit($value);
+      $val: pixelsToRem($value);
+
+      @if $unit == "px" {
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == "rem" {
+        $px : append($px,  ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {
+    #{$property}: $px;
+  } @else {
+    #{$property}: $px;
+    #{$property}: $rem;
+  }
+}

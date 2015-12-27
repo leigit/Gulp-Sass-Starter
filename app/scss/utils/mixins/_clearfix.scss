@@ -1,0 +1,45 @@
+/// Clearfix
+///
+/// @example
+///  .element {
+///    @include %cf;
+///   }
+/// @see cf
+/// @see clearfix
+%cf {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+/// Clearfix
+///
+/// @example
+///  .element {
+///    @include cf;
+///   }
+/// @see cf
+/// @see clearfix
+@mixin cf {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+/// Clearfix
+///
+/// @example
+///  .element {
+///    @include clearfix;
+///   }
+@mixin clearfix {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}

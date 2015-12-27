@@ -1,0 +1,17 @@
+/// Text input
+///
+/// Calls addresses all text inputs in one selector
+$text-input-types: text, password, date, datetime, datetime-local, month, week, email, number, search, tel, time, url, color !default;
+
+@mixin text-input($types: $text-input-types) {
+  $selectors: ();
+
+  @each $type in $types {
+    $selector: unquote("input[type='#{$type}']");
+    $selectors: append($selectors, $selector, comma);
+  }
+
+  & #{$selectors} {
+    @content;
+  }
+}

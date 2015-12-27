@@ -1,0 +1,9 @@
+/// Trans-prep
+///
+/// Prepares for transforms. Gives backface-visibility: hidden
+/// to remove flickering effect on Webkit browsers
+/// @link http://blog.teamtreehouse.com/increase-your-sites-performance-with-hardware-accelerated-css
+@mixin trans-prep {
+  // backface visibility
+  backface-visibility: hidden;
+}

@@ -6,6 +6,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 var sassdoc = require('sassdoc');
+var sassGlob = require('gulp-sass-glob');
 
 
 var appConfig = {
@@ -29,8 +30,8 @@ gulp.task('browserSync', function() {
 
 gulp.task('sass', function() {
  return gulp.src(appConfig.src + 'scss/**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
+    .pipe(sassGlob())
     .pipe($.plumber()) // keep watching and log errors in the console
-    //.pipe(sassdoc())
     .pipe($.sourcemaps.init())
     .pipe($.sass.sync({ // Passes it through a gulp-sass
       /* include sass from the bower_components folder */

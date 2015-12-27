@@ -1,0 +1,19 @@
+/// Font Smoothing
+///
+/// Mixin to turn on font smoothing, especially for light text on dark background for OSX
+/// @example
+/// .element {
+///  @include font-smoothing;
+/// }
+
+@mixin font-smoothing($value: on) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}

@@ -1,0 +1,29 @@
+/// vertical-align
+/// @example
+/// .element p {
+///   @include vertical-align;
+/// }
+/// @parameters $position
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/// Ghost Vertical Align
+/// @example
+/// .element {
+///   @include ghostVerticalAlign;
+/// }
+/// @link https://css-tricks.com/centering-in-the-unknown/
+@mixin ghostVerticalAlign(){
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%; width: .1px;
+  }
+}

@@ -1,0 +1,16 @@
+/// Breakpoints
+/// @example
+/// .element {
+///   @include breakpoint(medium);
+/// }
+/// breakpoint mixin used in conjuction with the breakpoint variables
+@mixin breakpoint($name) {
+    @if map-has-key($breakpoints, $name) {
+        @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+  @else {
+    @warn "Couldn't find a your breakpoint named `#{$name}`.";
+  }
+}
