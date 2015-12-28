@@ -1,7 +1,6 @@
 {
   "name": "Gulp-Sass-Starter",
   "version": "1.0.0",
-  "private": true,
   "description": "Basic Gulp and Sass project starter",
   "main": "gulpfile.js",
   "scripts": {
@@ -12,7 +11,7 @@
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.9.8",
-    "del": "^2.2.0",
+    "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-cache": "^0.4.1",
@@ -20,7 +19,6 @@
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-load-plugins": "^1.1.0",
-    "gulp-minify-css": "^1.2.1",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^2.0.4",
