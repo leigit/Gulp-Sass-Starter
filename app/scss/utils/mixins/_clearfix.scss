@@ -2,27 +2,11 @@
 ///
 /// @example
 ///  .element {
-///    @include %cf;
+///    @extend %cf;
 ///   }
-/// @see cf
 /// @see clearfix
-%cf {
-  &:after {
-    content: " ";
-    display: table;
-    clear: both;
-  }
-}
 
-/// Clearfix
-///
-/// @example
-///  .element {
-///    @include cf;
-///   }
-/// @see cf
-/// @see clearfix
-@mixin cf {
+%clearfix {
   &:after {
     content: " ";
     display: table;
@@ -36,6 +20,7 @@
 ///  .element {
 ///    @include clearfix;
 ///   }
+
 @mixin clearfix {
   &:after {
     content: " ";

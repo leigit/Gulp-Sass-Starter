@@ -5,6 +5,7 @@
 /// ===========
 
 /// To be used with the @see breakpoint mixin
+/// @group Breakpoints
 $breakpoints: (
   'tiny':   ( max-width:  767px ),
   'small':  ( min-width:  768px ),

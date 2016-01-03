@@ -5,6 +5,7 @@
 /// .element {
 ///  @include font-smoothing;
 /// }
+/// @group Typography
 
 @mixin font-smoothing($value: on) {
   @if $value == on {

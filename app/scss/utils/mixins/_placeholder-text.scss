@@ -1,6 +1,8 @@
 /// Placeholder
 ///
 /// Changes Placeholder styles
+/// @group Forms
+
 @mixin placeholder {
   &::-webkit-input-placeholder {
     @content;

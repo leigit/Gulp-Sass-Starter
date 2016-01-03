@@ -5,6 +5,8 @@
 /// .element {
 ///  @include rem(font-size, 16px)
 /// }
+/// @group Typography
+
 @function pixelsToRem($n) {
   @return $n / ($n * 0 + 1);
 }
@@ -12,6 +14,7 @@
 /// Pixels to REM - mixin
 /// ----------
 /// relies on setting: html {font-size: 62.5%} to set a base of 10px
+/// html {font-size: 62.5%}
 /// @example
 /// .element {
 ///  @include rem(font-size, 16px)

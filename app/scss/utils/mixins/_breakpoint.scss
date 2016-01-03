@@ -4,6 +4,8 @@
 ///   @include breakpoint(medium);
 /// }
 /// breakpoint mixin used in conjuction with the breakpoint variables
+/// @group Breakpoints
+
 @mixin breakpoint($name) {
     @if map-has-key($breakpoints, $name) {
         @media #{inspect(map-get($breakpoints, $name))} {

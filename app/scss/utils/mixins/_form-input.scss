@@ -1,6 +1,7 @@
 /// Text input
 ///
 /// Calls addresses all text inputs in one selector
+/// @group Forms
 $text-input-types: text, password, date, datetime, datetime-local, month, week, email, number, search, tel, time, url, color !default;
 
 @mixin text-input($types: $text-input-types) {

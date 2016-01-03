@@ -5,6 +5,7 @@
 /// - $triangle-color      - Used to set border-color which makes up triangle. No default
 /// - $triangle-direction  - Used to determine which direction triangle points.
 ///                          Options: top, bottom, left, right
+
 @mixin triangle($triangle-size, $triangle-color, $triangle-direction) {
   content: "";
   display: block;

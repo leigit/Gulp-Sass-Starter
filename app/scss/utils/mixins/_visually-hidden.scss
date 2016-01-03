@@ -6,6 +6,7 @@
 /// .element {
 ///  @include is-invisible;
 /// }
+
 @mixin is-invisible {
   position: absolute;
   overflow: hidden;
