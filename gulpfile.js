@@ -41,6 +41,7 @@ gulp.task('sass', function() {
     .pipe($.autoprefixer({
       browsers: ['last 3 versions', 'ie 9']
     }))
+    .pipe($.cssnano())
     .pipe($.sourcemaps.write('maps'))
     .pipe(gulp.dest(appConfig.src + '/css'))
     .pipe(browserSync.reload({ // Reloading with Browser Sync
