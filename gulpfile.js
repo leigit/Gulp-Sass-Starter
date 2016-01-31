@@ -42,7 +42,7 @@ gulp.task('sass', function() {
       browsers: ['last 3 versions', 'ie 9']
     }))
     .pipe($.cssnano())
-    .pipe($.sourcemaps.write('maps'))
+    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(appConfig.src + '/css'))
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
