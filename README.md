@@ -16,7 +16,7 @@ Install Bower dependencies
 $ bower install
 ~~~
 
-If you do not have gulp installed globally, install it with the follwing command
+If you do not have gulp installed globally, install it with the following command
 
 ~~~
 $ npm install -g gulp
