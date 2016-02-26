@@ -1,13 +1,15 @@
 'use strict';
-var gulp = require('gulp');
-// Rather than have to specify each gulp plugin, gulp-load-plugins will search your packages.json file and automatically include them
-var $ = require('gulp-load-plugins')();
-var del = require('del');
+var gulp        = require('gulp');
+var $           = require('gulp-load-plugins')();
+var del         = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
-var sassdoc = require('sassdoc');
-var sassGlob = require('gulp-sass-glob');
-
+var sassdoc     = require('sassdoc');
+var sassGlob    = require('gulp-sass-glob');
+var postcss     = require('gulp-postcss');
+var postcssSVG  = require('postcss-svg');
+var gutil       = require('gulp-util');
+var a11y        = require('a11y');
 
 var appConfig = {
   src: 'app/',
@@ -29,6 +31,14 @@ gulp.task('browserSync', function() {
 // gulp compile sass
 
 gulp.task('sass', function() {
+  var postcssProcessors;
+postcssSVG = require('postcss-svg');
+postcssProcessors = [
+  postcssSVG({
+    //defaults: '[fill]: black',
+    paths: ['./app/images/'],
+ })
+];
  return gulp.src(appConfig.src + 'sass/**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
     .pipe(sassGlob())
     .pipe($.plumber()) // keep watching and log errors in the console
@@ -41,13 +51,13 @@ gulp.task('sass', function() {
     .pipe($.autoprefixer({
       browsers: ['last 3 versions', 'ie 9']
     }))
+    .pipe(postcss(postcssProcessors))
     .pipe($.cssnano())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(appConfig.src + '/css'))
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
-
 });
 
 gulp.task('sassdoc', function () {
@@ -60,7 +70,6 @@ gulp.task('sassdoc', function () {
       watermark: true,
     },
   };
-
   return gulp.src('app/sass/**/*.scss')
     .pipe(sassdoc(options));
 });
@@ -143,3 +152,32 @@ gulp.task('default', function(callback) {
 gulp.task('build', function(callback) {
   runSequence('clean:dist', ['sass', 'useref', 'images', 'fonts', 'sassdoc'], callback)
 });
+
+
+/* -------------------------------------- */
+// Accessibility Task
+// https://github.com/addyosmani/a11y
+
+gulp.task('a11y', function() {
+  a11y('http://google.com', function(err, reports) {
+    if (err) {
+      gutil.log(gutil.colors.red('gulp a11y error: ' + err));
+      return;
+    }
+    reports.audit.forEach(function(report) {
+      if (report.result === 'FAIL') {
+        gutil.log(displaySeverity(report), gutil.colors.red(report.heading), report.elements);
+      }
+    });
+  });
+});
+
+function displaySeverity(report) {
+  if (report.severity == 'Severe') {
+    return gutil.colors.red('[' + report.severity + '] ');
+  } else if (report.severity == 'Warning') {
+    return gutil.colors.yellow('[' + report.severity + '] ');
+  } else {
+    return '[' + report.severity + '] ';
+  }
+}
