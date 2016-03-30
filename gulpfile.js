@@ -94,15 +94,12 @@ gulp.task('watch', function () {
 
 // Optimizing CSS and JavaScript
 gulp.task('useref', function() {
-  var assets = $.useref.assets();
   return gulp.src(appConfig.src + '*.html')
-    .pipe(assets)
+    .pipe($.useref())
     // Uglifies only if it's a Javascript file
     .pipe($.if('*.js', $.uglify()))
     // Minifies only if it's a CSS file
     .pipe($.if('*.css', $.cssnano()))
-    .pipe(assets.restore())
-    .pipe($.useref())
     .pipe($.size({
       title: 'useref'
     }))
@@ -111,7 +108,7 @@ gulp.task('useref', function() {
 
 // Optimizing Images
 gulp.task('images', function() {
-  return gulp.src(appConfig.src + 'images/**/*.+(png|jpg|jpeg|gif|svg)')
+  return gulp.src(appConfig.src + 'images/*')
   // Caching images that ran through imagemin
     .pipe($.cache($.imagemin({
       interlaced: true,
